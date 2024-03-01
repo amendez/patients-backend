@@ -4,6 +4,8 @@ dj-database-url==2.1.0
 Django==5.0.2
 gunicorn==21.2.0
 packaging==23.2
+psycopg[c]; sys_platform == "linux"
+psycopg[binary]; sys_platform != "linux"
 python-dotenv==1.0.1
 sqlparse==0.4.4
 whitenoise==6.6.0
