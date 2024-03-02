@@ -1,0 +1,5 @@
+from .address_serializer import AddressSerializer
+from .additional_fields_serializer import ConciseAdditionalFieldSerializer
+from .patient_serializer import ConcisePatientSerializer, PatientSerializer
+from .user_serializer import UserSerializer
+from .additional_field_configuration_serializer import AdditionalFieldConfigurationSerializer
