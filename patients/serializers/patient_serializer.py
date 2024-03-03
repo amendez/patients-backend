@@ -33,3 +33,16 @@ class PatientSerializer(serializers.ModelSerializer):
                         additional_field=field, value=value, patient=patient, provider=patient.provider
                     )
             return patient
+
+    def update(self, instance, validated_data):
+        with transaction.atomic():
+            instance = super().update(instance, validated_data)
+            for field in instance.provider.additional_field_configurations.all():
+                value = self.context['request'].data.get(f"custom-{field.id}", None)
+                if value:
+                    updated_count = instance.additional_fields.filter(additional_field=field).update(value=value)
+                    if not updated_count:
+                        instance.additional_fields.create(
+                            additional_field=field, value=value, patient=instance, provider=instance.provider
+                        )
+            return instance
