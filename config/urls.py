@@ -3,12 +3,14 @@ from django.contrib import admin
 from rest_framework import routers
 
 from patients import views
-from patients.viewsets import UsersViewSet, PatientsViewSet, AdditionalFieldConfigurationsViewSet
+from patients.viewsets import AddressesViewSet, UsersViewSet, PatientsViewSet, AdditionalFieldConfigurationsViewSet
 
 router = routers.DefaultRouter()
 router.register(r'users', UsersViewSet)
 router.register(r'patients', PatientsViewSet)
 router.register(r'additional_field_configurations', AdditionalFieldConfigurationsViewSet)
+router.register(r'addresses', AddressesViewSet)
+
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

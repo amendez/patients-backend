@@ -1,3 +1,4 @@
 from .users_viewset import UsersViewSet
 from .patients_viewset import PatientsViewSet
 from .additional_field_configurations_viewset import AdditionalFieldConfigurationsViewSet
+from .addresses_viewset import AddressesViewSet
