@@ -28,5 +28,5 @@ class Address(models.Model):
                 self.latitude = location.latitude
                 self.longitude = location.longitude
                 self.save()
-        except:
+        except Exception as e:
             print(f"Error while geocoding: {e}")
