@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from geopy.geocoders import Nominatim
 from django.db import models
 
 
@@ -10,9 +10,20 @@ class Address(models.Model):
     state = models.CharField(max_length=120, blank=False, null=False)
     country = models.CharField(max_length=120, blank=False, null=False)
 
+    latitude = models.FloatField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
+
     patient = models.ForeignKey(
         "patients.Patient", related_name="addresses", null=True, on_delete=models.PROTECT
     )
 
     def __str__(self):
         return f"{self.address1}, {self.city}, {self.state}"
+
+    def execute_geocoding(self):
+        geolocator = Nominatim(user_agent="finni code challenge")
+        location = geolocator.geocode(f"{self.address1}, {self.address2}, {self.zip_code}, {self.city}, {self.state}, {self.country}")
+        if location:
+            self.latitude = location.latitude
+            self.longitude = location.longitude
+            self.save()
