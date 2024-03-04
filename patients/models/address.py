@@ -21,9 +21,12 @@ class Address(models.Model):
         return f"{self.address1}, {self.city}, {self.state}"
 
     def execute_geocoding(self):
-        geolocator = Nominatim(user_agent="finni code challenge")
-        location = geolocator.geocode(f"{self.address1}, {self.address2}, {self.zip_code}, {self.city}, {self.state}, {self.country}")
-        if location:
-            self.latitude = location.latitude
-            self.longitude = location.longitude
-            self.save()
+        try:
+            geolocator = Nominatim(user_agent="finni code challenge")
+            location = geolocator.geocode(f"{self.address1}, {self.address2}, {self.zip_code}, {self.city}, {self.state}, {self.country}")
+            if location:
+                self.latitude = location.latitude
+                self.longitude = location.longitude
+                self.save()
+        except Exception as e:
+            print(f"Error while geocoding: {e}")
