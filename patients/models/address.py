@@ -22,7 +22,7 @@ class Address(models.Model):
 
     def execute_geocoding(self):
         try:
-            geolocator = Nominatim(user_agent="finni code challenge")
+            geolocator = Nominatim(user_agent="Patients code challenge")
             location = geolocator.geocode(f"{self.address1}, {self.city}, {self.state}, {self.zip_code}, {self.country}")
             if location:
                 self.latitude = location.latitude
